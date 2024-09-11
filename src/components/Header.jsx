@@ -1,15 +1,17 @@
+import { NavLink } from "react-router-dom";
+
 export default function Header(){
     return(
         <>
-            <header>
+            <header className="bg-indigo-800 flex ">
                 <div>
-                    <h1>Portal Filmes</h1>
+                    <h1 className="portal">Portal Filmes</h1>
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Filmes</a></li>
-                        <li><a href="">Gêneros</a></li>
+                        <li><NavLink to = "/">Home</NavLink></li>
+                        <li><NavLink to = "/movies">Filmes</NavLink></li>
+                        <li><NavLink to = "/genre">Gêneros</NavLink></li>
                     </ul>
                 </nav>
             </header>
