@@ -17,7 +17,7 @@ export default function Home(){
         }
         </CardContainer>
 
-        <CardContainer  titulo={"Melhores avaliados"}>
+        <CardContainer titulo={"Melhores avaliados"}>
            { 
             movies
             .filter(filme=> filme.avaliacao > 7)
