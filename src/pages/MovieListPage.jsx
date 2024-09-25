@@ -45,10 +45,13 @@ export default function MovieListPage(){
          value={search}
          onChange={handleSearch} />
          <section className="flex">
-{ 
+{           
+            filmesFiltrados.length > 0 ?
             filmesFiltrados.map(filme => (
                 <MovieCard key ={filme.id} {...filme}/>
             ))
+            :
+            <p>Nao existe filmes assim</p>
         }
 
          </section>
