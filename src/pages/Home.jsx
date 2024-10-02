@@ -6,7 +6,7 @@ export default function Home(){
     console.log(movies);
     return(
         <>
-        <CardContainer  titulo={"Filmes Antigos"}>
+        <CardContainer titulo={"Filmes Antigos"}>
            { 
             movies
             .filter(filme=> filme.ano_lancamento < 2000)
