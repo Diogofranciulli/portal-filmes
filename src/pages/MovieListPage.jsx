@@ -1,32 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import MovieCard from "../components/MovieCard";
 import movies from "../data/movies.json"
 export default function MovieListPage(){
-    //  const [contador, setContador] = useState(0)
-    //  const [textoBotao, settextoBotao] = useState('teste')
-    // const handleClick = () =>{
-    //     setContador((prev)=>(
-    //         prev + 1
-    //     ))
-    //     console.log(contador +1);
-    // }
-    // const diminuiClick = () =>{
-    //     setContador((prev)=>(
-    //         prev - 1
-    //     ))
-    //     console.log(contador - 1);
-    // }
-    // const zerarClick = () =>{
-    //     setContador((prev)=>(
-    //         prev * 0
-    //     ))
-    //     console.log(contador );
-    // }
-    
-    // const trocaPalavra = () =>{
-    //     settextoBotao((prev) => (prev === 'flaco' ? 'Lopes':'flaco'));
-    // }
+
     const [search, setSearch] = useState("")
+    const [filmes, setfilmes] = useState([])
+
+
+    useEffect(() =>{
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR')
+            .then(res => res.json())
+            .then(res => setfilmes(res.results))
+            .catch(erro => console.log(erro))
+            .finally(()=> console.log("fim!"))
+    }, [])
+
+    
+    
+
     const handleSearch = (e) =>{
         setSearch(e.target.value)
         console.log(search);
@@ -45,24 +36,22 @@ export default function MovieListPage(){
          value={search}
          onChange={handleSearch} />
          <section className="flex">
-{           
-            filmesFiltrados.length > 0 ?
-            filmesFiltrados.map(filme => (
-                <MovieCard key ={filme.id} {...filme}/>
-            ))
-            :
-            <p>Nao existe filmes assim</p>
-        }
-
-         </section>
          
-        {/* <p>{contador}</p>
-        <button  onClick={ handleClick }>Aumentar</button><br></br>
-        <button onClick={ diminuiClick }>diminuir</button><br></br>
-        <button onClick={ zerarClick }>zerar</button><br></br>  
+            <section className="flex">
+                {
+                    filmes.map(filme =>(
+                        <>
+                        <h1>{filme.title}</h1>
+                        <img src ={`https://image.tmdb.org/t/p/w92${filme.poster_path}`}/>
+                        
+                     </>
+                    ))
+                        
+                }
+            </section>
 
-        <p>{textoBotao}</p>
-        <button onClick={ trocaPalavra }>troque a palavra</button> */}
+
+         </section>    
         </>
     )
 }

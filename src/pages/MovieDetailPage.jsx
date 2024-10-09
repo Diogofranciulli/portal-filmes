@@ -1,13 +1,23 @@
 import { useParams } from "react-router-dom"
+import data from '../data/movies.json'
 
 export default function MovieDetailPage(){
+    
+    const { id } = useParams()
 
-    const {id} = useParams()
+    const movie = data.find((movie) => movie.id == id)
     return(
         <>
-        <h1 className="bg-black text-white">Movie Detail Page</h1>
-        <p>o id do filme é {id}</p>
-        {/* Exibe detalhes de um filme específico. */}
+        {
+            movie ?
+                <div key={movie.id}>
+                    <h2>{movie.titulo}</h2>
+                    <img src={`/${movie.imagem_destaque}`} alt={movie.titulo} />
+                    <p>{movie.sinopse}</p>
+                    <p>{movie.diretor}</p>
+                </div>
+            : <p>Filme não encontrado</p>
+        }
         </>
     )
 }
